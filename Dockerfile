@@ -528,8 +528,8 @@ RUN \
         cp qt-faststart ${PREFIX}/bin
 
 
-FROM        base AS release
-ENV         LD_LIBRARY_PATH /opt/ffmpeg/lib:/usr/local/lib
+FROM    base AS release
+
 RUN     apt-get -yqq update && \
         apt-get install -yq --no-install-recommends build-essential && \
         apt-get autoremove -y && \
@@ -537,5 +537,10 @@ RUN     apt-get -yqq update && \
 
 COPY --from=build /opt/ffmpeg /opt/ffmpeg
 
-ENV	PATH="/opt/ffmpeg/bin:${PATH}" \
-	PKG_CONFIG_PATH=/opt/ffmpeg/lib/pkgconfig
+
+ENV     LD_LIBRARY_PATH=/opt/ffmpeg/lib:/usr/local/lib
+	PATH="/opt/ffmpeg/bin:${PATH}" \
+	PKG_CONFIG_PATH=/opt/ffmpeg/lib/pkgconfig \
+	CFLAG=/opt/ffmpeg/include/ \
+	LIBRARY_PATH=/opt/ffmpeg/lib:/usr/local/lib
+	
