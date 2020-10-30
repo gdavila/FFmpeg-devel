@@ -538,7 +538,7 @@ RUN     apt-get -yqq update && \
 COPY --from=build /opt/ffmpeg /opt/ffmpeg
 
 
-ENV     LD_LIBRARY_PATH=/opt/ffmpeg/lib:/usr/local/lib
+ENV     LD_LIBRARY_PATH=/opt/ffmpeg/lib:/usr/local/lib \
 	PATH="/opt/ffmpeg/bin:${PATH}" \
 	PKG_CONFIG_PATH=/opt/ffmpeg/lib/pkgconfig \
 	CFLAG=/opt/ffmpeg/include/ \
